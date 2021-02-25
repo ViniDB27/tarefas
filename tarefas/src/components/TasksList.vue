@@ -73,6 +73,13 @@ export default {
                         confirmButtonText: 'Ok'
                     })
                 })
+            }else{
+                 Swal.fire({
+                        title: 'Ops!',
+                        text: 'A tarefa não teve mudança, altere o nome da tarefa para atualziar',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    })
             }
 
         },
