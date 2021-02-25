@@ -59,7 +59,7 @@ export default {
                 confirmButtonText: 'Alterar',
             })
 
-            if(updateTask){
+            if(updateTask && event.title !== updateTask){
                 console.log(updateTask)
                 await api.put(`/tarefa/${event.id}`,{
                     title:updateTask
