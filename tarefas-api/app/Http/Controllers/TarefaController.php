@@ -9,8 +9,6 @@ class TarefaController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -21,34 +19,22 @@ class TarefaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $tarefa = Tarefa::create([
-            'title' => $request->input('title'),
+            'name' => $request->input('name'),
+            'pending' => $request->input('pending'),
         ]);
 
         return response()->json(["message" => 'Tarefa cadastrada com sucesso!', 'tarefa' => $tarefa]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
+    
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
@@ -58,7 +44,8 @@ class TarefaController extends Controller
             return response()->json(["erro" => "Não temos nem uma tarefa nesse id"],404);
         }
 
-        $tarefa->title = $request->input('title');
+        $tarefa->name = $request->input('name');
+        $tarefa->pending = $request->input('pending');
 
         $tarefa->save();
 
@@ -69,7 +56,6 @@ class TarefaController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
