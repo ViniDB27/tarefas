@@ -58,7 +58,7 @@ export default {
 			}else{
 				Swal.fire({
 					title: 'Ops...',
-					text: 'Essa Tarefa já existe!',
+					text: 'Essa tarefa já existe!',
 					icon: 'warning',
 					confirmButtonText: 'Ok'
 				})
@@ -100,7 +100,7 @@ export default {
 				}else{
 					 Swal.fire({
                         title: 'Ops...',
-                        text: 'A tarefa não teve mudança, altere o nome da tarefa para atualziar',
+                        text: 'A tarefa não teve mudança, altere o nome da tarefa para atualizar',
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     })
@@ -113,7 +113,7 @@ export default {
 
 			const { value: accept } = await Swal.fire({
 
-                title: `Você tem certeza que deseja exluir a tarefa ${task.name}?`,
+                title: `Você tem certeza que deseja exluir a tarefa ${task.name.toLowerCase()}?`,
                 text: "Você não poderá reverter essa ação mais tarde!",
                 icon: 'warning',
                 showCancelButton: true,
