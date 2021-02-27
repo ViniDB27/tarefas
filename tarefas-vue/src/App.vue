@@ -145,6 +145,13 @@ export default {
 		},
 		toggleTaskState(i){
 			this.tasks[i].pending = !this.tasks[i].pending
+			api.put(`/tarefa/toggle/${this.tasks[i].id}`,{
+				pending: this.tasks[i].pending
+			})
+			.catch(erro => {
+				alert('Desculpe ouve um erro no servidor!')
+				console.log(erro)
+			})
 		}
 	},
 	mounted(){

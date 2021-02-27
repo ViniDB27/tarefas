@@ -24,4 +24,6 @@ Route::group(['prefix' => 'tarefa'], function(){
     Route::post('/', 'TarefaController@store');
     Route::put('/{id}', 'TarefaController@update');
     Route::delete('/{id}', 'TarefaController@destroy');
+
+    Route::put('/toggle/{id}', 'TarefaController@toggleTask');
 });

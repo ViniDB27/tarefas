@@ -22,6 +22,12 @@ class TarefaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            "name"          => 'required|max:100',
+            "pending"     => 'required|boolean'
+        ]);
+
+
         $tarefa = Tarefa::create([
             'name' => $request->input('name'),
             'pending' => $request->input('pending'),
@@ -29,7 +35,7 @@ class TarefaController extends Controller
 
         return response()->json(["message" => 'Tarefa cadastrada com sucesso!', 'tarefa' => $tarefa]);
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -38,6 +44,11 @@ class TarefaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            "name"          => 'required|max:100',
+            "pending"     => 'required|boolean'
+        ]);
+
         $tarefa = Tarefa::all()->where('id', $id)->first();
 
         if(!$tarefa){
@@ -68,5 +79,24 @@ class TarefaController extends Controller
         $tarefa->delete();
 
         return response()->json(["message" => "Tarefa $title excluida com sucesso!"]);
+    }
+
+    public function toggleTask(Request $request,$id)
+    {
+        $this->validate($request,[
+            "pending"     => 'required|boolean'
+        ]);
+
+        $tarefa = Tarefa::all()->where('id', $id)->first();
+
+        if(!$tarefa){
+            return response()->json(["erro" => "Não temos nem uma tarefa nesse id"],404);
+        }
+
+        $tarefa->pending = $request->input('pending');
+
+        $tarefa->save();
+
+        return response()->json(["message" => "Tarefa alterada com sucesso!", "tarefa"=>$tarefa]);
     }
 }
